@@ -21,7 +21,7 @@ export const HomeRoutes = [
   },
   {
     // home/*に一致した後にも引っかかるように
-    path: "*",
+    path: "/*",
     exact: false,
     children: <Page404 />,
   },
