@@ -5,7 +5,7 @@ import { UserManagement } from "../components/pages/UserManagement";
 
 export const HomeRoutes = [
   {
-    path: "/",
+    path: "/", // ""でも動く
     exact: true,
     children: <Home />,
   },
@@ -21,7 +21,7 @@ export const HomeRoutes = [
   },
   {
     // home/*に一致した後にも引っかかるように
-    path: "/*",
+    path: "*",
     exact: false,
     children: <Page404 />,
   },
