@@ -1,17 +1,18 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { Wrap, WrapItem, Spinner, Center, Modal } from "@chakra-ui/react";
+import { Wrap, WrapItem, Spinner, Center } from "@chakra-ui/react";
 import { memo, useEffect, VFC, useCallback } from "react";
 import { UserCard } from "../organisms/user/UserCard";
 import { useAllUsers } from "../../hooks/useAllUsers";
 import { useDisclosure } from "@chakra-ui/react";
 import { UserDetailModal } from "../organisms/user/UserDetailModal";
 import { useSelectUser } from "../../hooks/useSelectUser";
+import { useLoginUser } from "../../hooks/useLoginUser";
 
 export const UserManagement: VFC = memo(() => {
   const { getUsers, users, loding } = useAllUsers();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { onSelectUser, selectedUser } = useSelectUser();
-  console.log(selectedUser);
+  const { loginUser } = useLoginUser();
 
   useEffect(() => getUsers(), []);
 
@@ -44,7 +45,12 @@ export const UserManagement: VFC = memo(() => {
           ))}
         </Wrap>
       )}
-      <UserDetailModal isOpen={isOpen} onClose={onClose} user={selectedUser} />
+      <UserDetailModal
+        isOpen={isOpen}
+        isAdmin={loginUser?.isAdmin}
+        onClose={onClose}
+        user={selectedUser}
+      />
     </>
   );
 });
